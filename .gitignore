@@ -39,3 +39,26 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/src/generated/prisma
+
+# sqlite 数据库（含用户凭据与内容数据）
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# 本地数据目录
+/data/
+
+# AI 工具配置
+.agents/
+.claude/
+.windsurf/
+AGENTS.md
+CLAUDE.md
+skills-lock.json
+
+# 本地备份与预览
+style-backup-*/
+style-preview/

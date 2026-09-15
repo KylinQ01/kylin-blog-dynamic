@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  name      String?
+  role      String   @default("admin")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Post {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  title       String
+  description String?
+  content     String
+  category    String?
+  tags        String   @default("")
+  pinned      Boolean  @default(false)
+  published   Boolean  @default(true)
+  password    String   @default("")
+  viewCount   Int      @default(0)
+  publishedAt DateTime
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Moment {
+  id        String   @id @default(cuid())
+  content   String
+  mood      String   @default("")
+  tags      String   @default("")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Friend {
+  id          String   @id @default(cuid())
+  title       String
+  imgurl      String   @default("")
+  description String   @default("")
+  siteurl     String
+  tags        String   @default("")
+  weight      Int      @default(0)
+  enabled     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model GalleryAlbum {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String   @default("")
+  location    String   @default("")
+  date        String   @default("")
+  cover       String   @default("")
+  tags        String   @default("")
+  photoCount  Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  author    String
+  email     String   @default("")
+  url       String   @default("")
+  postId    String?
+  page      String   @default("guestbook")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SiteConfig {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
