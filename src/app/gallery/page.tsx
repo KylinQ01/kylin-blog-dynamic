@@ -38,7 +38,7 @@ export default async function GalleryPage() {
           {albums.map((album) => (
             <Link key={album.id} href={`/gallery/${album.slug}`} className="card-base overflow-hidden group hover:shadow-lg transition-all">
               <div className="aspect-video relative overflow-hidden">
-                <Image src={album.cover || "/assets/images/placeholder.jpg"} alt={album.name} fill className="object-cover group-hover:scale-105 transition-transform duration-300" unoptimized />
+                <Image src={album.cover || "/assets/images/placeholder.svg"} alt={album.name} fill className="object-cover group-hover:scale-105 transition-transform duration-300" unoptimized />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 <div className="absolute bottom-3 left-3 right-3 text-white">
                   <h3 className="font-bold">{album.name}</h3>

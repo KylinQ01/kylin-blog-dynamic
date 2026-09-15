@@ -1,3 +1,10 @@
+export interface MusicTrack {
+  name: string;
+  artist: string;
+  url: string;
+  cover: string;
+}
+
 export const siteConfig = {
   title: "Kylin",
   subtitle: "怀化佳木所失，峥嵘苍翠犹立",
@@ -59,8 +66,8 @@ export const siteConfig = {
     playMode: "list",
     showLyrics: true,
     playlist: [
-      { name: "使一颗心免于哀伤", artist: "哼唱", url: "/assets/music/使一颗心免于哀伤-哼唱.mp3", cover: "/assets/music/cover/109951169585655912.webp" },
-    ],
+      // 将音频文件放入 public/assets/music/ 后在此添加曲目
+    ] as MusicTrack[],
   },
   footer: {
     enable: false,

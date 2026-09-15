@@ -21,12 +21,11 @@ const wallpapers = {
   ],
 };
 
-// Fallback 渐变背景
+// Fallback 渐变背景（与主题青绿色系协调，壁纸加载前的首帧显示）
 const gradients = [
-  "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-  "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-  "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-  "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+  "linear-gradient(135deg, hsl(165, 45%, 40%) 0%, hsl(190, 45%, 55%) 100%)",
+  "linear-gradient(135deg, hsl(170, 40%, 35%) 0%, hsl(200, 40%, 50%) 100%)",
+  "linear-gradient(135deg, hsl(160, 42%, 38%) 0%, hsl(185, 42%, 52%) 100%)",
 ];
 
 export function BackgroundBanner({ variant = "page" }: BackgroundBannerProps) {

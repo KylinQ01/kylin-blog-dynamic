@@ -35,14 +35,28 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     if (!mounted) return;
     const root = document.documentElement;
 
-    if (mode === "system") {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      root.classList.toggle("dark", prefersDark);
-    } else {
-      root.classList.toggle("dark", mode === "dark");
-    }
+    const applyTheme = () => {
+      if (mode === "system") {
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        root.classList.toggle("dark", prefersDark);
+      } else {
+        root.classList.toggle("dark", mode === "dark");
+      }
+    };
 
-    root.style.setProperty("--hue", String(hue));
+    applyTheme();
+    // 系统深浅色实时切换时同步（否则页面处于混合态：部分组件暗色、部分亮色）
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    media.addEventListener("change", applyTheme);
+    return () => media.removeEventListener("change", applyTheme);
+  }, [mode, mounted]);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty("--hue", String(hue));
+  }, [hue]);
+
+  useEffect(() => {
+    if (!mounted) return;
     localStorage.setItem("theme-mode", mode);
     localStorage.setItem("theme-hue", String(hue));
   }, [mode, hue, mounted]);

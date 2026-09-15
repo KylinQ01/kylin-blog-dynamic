@@ -201,6 +201,7 @@
 }
 
 :root {
+  color-scheme: light;
   --hue: 165;
   --background: #f8fafc;
   --foreground: #1e293b;
@@ -232,6 +233,7 @@
 }
 
 .dark {
+  color-scheme: dark;
   --background: #0f172a;
   --foreground: #e2e8f0;
   --card-bg: #1e293b;
@@ -309,32 +311,10 @@ pre code {
   box-shadow: var(--shadow-md);
 }
 
-/* 文章卡片 hover 光环动效 */
+/* 文章卡片 hover 上浮（不再使用 ::before 光晕，避免与 .card-base::before 顶部细线冲突产生大面积色块） */
 .article-card {
   position: relative;
   overflow: hidden;
-}
-
-.article-card::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: radial-gradient(circle, hsl(var(--hue), 70%, 50%) 0%, transparent 70%);
-  opacity: 0;
-  transform: translate(-50%, -50%);
-  transition: width 0.5s ease, height 0.5s ease, opacity 0.3s ease;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.article-card:hover::before {
-  width: 150%;
-  height: 150%;
-  opacity: 0.08;
 }
 
 .article-card:hover {
@@ -573,9 +553,10 @@ body {
     linear-gradient(180deg, hsla(var(--hue), 45%, 12%, 0.55) 0%, var(--background) 40%);
 }
 
-/* 卡片精化：常态顶部渐变细线 + hover 上浮光晕 */
+/* 卡片精化：常态顶部渐变细线 + hover 上浮光晕
+   注意：背景必须不透明——半透明背景会与页面背景/Edge强制深色合成出不可控色块 */
 .card-base {
-  background: linear-gradient(180deg, hsla(var(--hue), 45%, 100%, 0.95), var(--card-bg));
+  background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: calc(var(--radius) + 0.5rem);
   box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 10px 28px -14px rgba(16, 24, 40, 0.14);
@@ -583,7 +564,7 @@ body {
 }
 
 .dark .card-base {
-  background: linear-gradient(180deg, hsla(var(--hue), 32%, 18%, 0.75), var(--card-bg));
+  background: var(--card-bg);
   border-color: hsl(var(--hue), 25%, 24%);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 12px 30px -16px rgba(0, 0, 0, 0.6);
 }
@@ -609,12 +590,12 @@ body {
 .card-base:hover {
   border-color: hsl(var(--hue), 50%, 68%);
   transform: translateY(-3px);
-  box-shadow: 0 6px 16px rgba(16, 24, 40, 0.06), 0 20px 40px -16px hsl(var(--hue), 55%, 45%, 0.35);
+  box-shadow: 0 6px 16px rgba(16, 24, 40, 0.06), 0 20px 40px -18px hsl(var(--hue), 55%, 45%, 0.16);
 }
 
 .dark .card-base:hover {
   border-color: hsl(var(--hue), 55%, 40%);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3), 0 20px 40px -14px hsla(var(--hue), 70%, 40%, 0.35);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3), 0 20px 40px -14px hsla(var(--hue), 70%, 40%, 0.2);
 }
 
 .card-base:hover::before {

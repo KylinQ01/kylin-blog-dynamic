@@ -77,6 +77,8 @@ export function MusicWidget() {
           <p className="text-xs text-[var(--muted)]">{currentSong?.artist || ""}</p>
         </div>
 
+        {playlist.length > 0 && (
+        <>
         {/* Progress */}
         <div className="mb-3">
           <div className="flex items-center gap-2 text-xs text-[var(--muted)]">
@@ -144,6 +146,8 @@ export function MusicWidget() {
           onLoadedMetadata={() => setDuration(audioRef.current?.duration || 0)}
           onEnded={nextTrack}
         />
+        </>
+        )}
       </div>
     </div>
   );
